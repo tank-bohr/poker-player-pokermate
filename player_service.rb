@@ -5,7 +5,7 @@ require_relative 'player'
 set :port, 8090
 set :bind, '0.0.0.0'
 
-configure(:production) { logger.level = 0 }
+# configure(:production) { logger.level = 0 }
 
 post "/" do
   if params[:action] == 'bet_request'
