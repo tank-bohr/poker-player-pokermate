@@ -14,6 +14,7 @@ class BetRequest
   end
 
   def call
+    return game_state.all_in
     if game_state.preflop?
       preflop
     else
