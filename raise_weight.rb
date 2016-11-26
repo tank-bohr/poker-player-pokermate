@@ -1,4 +1,4 @@
 class RaiseWeight < WeightCalc
-  def call(game_state)
+  def call
   end
 end
