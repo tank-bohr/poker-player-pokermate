@@ -1,4 +1,5 @@
-require_relative 'ranking_client'
+require 'pp'
+require "poker_ranking"
 
 class Player
 
@@ -68,9 +69,8 @@ class Player
     cards = game_state['community_cards'] +
             game_state['players'][game_state['in_action']]['hole_cards']
 
-    client = RankingClient.new
-    client.rank_raw(cards)['rank']
-  rescue
-    0
+    hand = PokerRanking::Hand.new(cards)
+    ranking_data = hand.data
+    ranking_data[:rank]
   end
 end
