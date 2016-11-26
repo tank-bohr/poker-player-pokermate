@@ -1,6 +1,6 @@
 class Player
 
-  VERSION = "Default Ruby folding player"
+  VERSION = "Version 17"
 
   def bet_request(game_state)
     game_state['current_buy_in'].to_i.nonzero? || game_state['minimum_raise']

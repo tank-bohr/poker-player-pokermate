@@ -5,7 +5,9 @@ require_relative 'player'
 set :port, 8090
 set :bind, '0.0.0.0'
 
-before { logger.level = 0 }
+configure :production do
+  before { logger.level = 0 }
+end
 
 post "/" do
   logger.debug { params }
