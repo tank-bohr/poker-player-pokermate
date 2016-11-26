@@ -12,6 +12,6 @@ class Player
   end
 
   def team(game_state)
-    game_state['players'].select { |player| player['name'].downcase = 'pokermate' }
+    'pokermate' == game_state['players'].select { |player| player['name'].downcase }
   end
 end
