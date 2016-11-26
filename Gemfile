@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rspec'
 gem 'bundler'
+
+gem 'rspec'
+gem 'webmock'
+
 gem 'rake'
 gem 'sinatra'
 gem "rack-test", require: "rack/test"
