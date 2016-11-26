@@ -2,11 +2,18 @@ require_relative 'ranking_client'
 
 class Player
 
-  VERSION = "Version 23"
+  VERSION = "Version 24"
 
   def bet_request(game_state)
+    if game_state['community_cards'].empty?
+      preflop(game_state)
+    else
+      flop(game_state)
+    end
+  end
+
+  def preflop(game_state)
     current_buy_in = game_state['current_buy_in'].to_i
-    bet = game_state['bet'].to_i
     player = find_player(game_state)
     bet = player['bet'].to_i
     cards = find_cards(player)
@@ -16,6 +23,20 @@ class Player
     return current_buy_in if (high_card?(cards) || potential_suit?(cards)) && (bet - current_buy_in) < 250
 
     0
+  end
+
+  def flop(game_state)
+    current_buy_in = game_state['current_buy_in'].to_i
+    player = find_player(game_state)
+    bet = player['bet'].to_i
+    minimum_raise = game_state['minimum_raise']
+
+    case rank(game_state)
+    when 0 then 0
+    when 1..2 then (bet - current_buy_in < 200 ? current_buy_in : 0)
+    when 3..5 then current_buy_in - bet + minimum_raise
+    when 5..8 then player['stack']
+    end
   end
 
   def showdown(game_state)
