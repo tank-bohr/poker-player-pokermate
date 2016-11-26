@@ -14,6 +14,6 @@ describe 'The PlayerService App' do
   it "says hello" do
     post '/', action: :version
     expect(last_response).to be_ok
-    expect(last_response.body).to eq('Version 17')
+    expect(last_response.body).to eq('Version 18')
   end
 end
