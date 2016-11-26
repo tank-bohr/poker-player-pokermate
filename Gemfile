@@ -5,3 +5,6 @@ gem 'bundler'
 gem 'rake'
 gem 'sinatra'
 gem "rack-test", require: "rack/test"
+
+gem 'pry'
+# gem 'rb-readline'
