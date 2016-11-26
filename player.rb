@@ -3,7 +3,7 @@ require "poker_ranking"
 
 class Player
 
-  VERSION = "Version 24"
+  VERSION = 'Version 25'
 
   def bet_request(game_state)
     if game_state['community_cards'].empty?
