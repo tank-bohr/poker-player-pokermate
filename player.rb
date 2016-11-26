@@ -1,15 +1,16 @@
 class Player
 
-  VERSION = "Version 21"
+  VERSION = "Version 22"
 
   def bet_request(game_state)
     current_buy_in = game_state['current_buy_in'].to_i
-    bet = game_state['bet'].to_i
     player = find_player(game_state)
+    bet = player['bet'].to_i
     cards = find_cards(player)
 
-    return game_state['minimum_raise'] if combination?(cards)
-    return current_buy_in if high_card?(cards) && (bet - current_buy_in) < 100
+
+    return (current_buy_in - bet + game_state['minimum_raise']) if pair?(cards)
+    return current_buy_in if (high_card?(cards) || potential_suit?(cards)) && (bet - current_buy_in) < 250
 
     0
   end
@@ -26,8 +27,12 @@ class Player
     player['hole_cards']
   end
 
-  def combination?(cards)
-    (cards[0]['rank'] == cards[1]['rank']) || (cards[0]['suit'] == cards[1]['suit'])
+  def pair?(cards)
+    (cards[0]['rank'] == cards[1]['rank'])
+  end
+
+  def potential_suit?(cards)
+    cards[0]['suit'] == cards[1]['suit']
   end
 
   def high_card?(cards)
