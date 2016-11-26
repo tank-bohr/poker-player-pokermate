@@ -3,7 +3,7 @@ require_relative './bet_request'
 
 class Player
 
-  VERSION = 'Version 26'
+  VERSION = 'Version 25 Refactored'
 
   def bet_request(game_state)
     BetRequest.call(game_state)
