@@ -1,6 +1,6 @@
 class Player
 
-  VERSION = "Version 20"
+  VERSION = "Version 21"
 
   def bet_request(game_state)
     current_buy_in = game_state['current_buy_in'].to_i
@@ -9,7 +9,7 @@ class Player
     cards = find_cards(player)
 
     return game_state['minimum_raise'] if combination?(cards)
-    # return current_buy_in if high_card?(cards) && (bet - current_buy_in) < 100
+    return current_buy_in if high_card?(cards) && (bet - current_buy_in) < 100
 
     0
   end
@@ -28,5 +28,9 @@ class Player
 
   def combination?(cards)
     (cards[0]['rank'] == cards[1]['rank']) || (cards[0]['suit'] == cards[1]['suit'])
+  end
+
+  def high_card?(cards)
+   cards.any? { |card| card['rank'].to_i.zero? } # 'A'.to_i == 0
   end
 end
