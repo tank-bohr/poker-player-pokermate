@@ -15,7 +15,7 @@ describe 'The PlayerService App' do
   it "says version" do
     post '/', action: :version
     expect(last_response).to be_ok
-    expect(last_response.body).to eq('Version 22')
+    expect(last_response.body).to eq('Version 23')
   end
 
   describe 'bet request' do

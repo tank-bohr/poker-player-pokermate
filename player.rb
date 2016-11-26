@@ -2,11 +2,11 @@ require_relative 'ranking_client'
 
 class Player
 
-  VERSION = "Version 22"
+  VERSION = "Version 23"
 
   def bet_request(game_state)
-    _current_buy_in = game_state['current_buy_in'].to_i
-    _bet = game_state['bet'].to_i
+    current_buy_in = game_state['current_buy_in'].to_i
+    bet = game_state['bet'].to_i
     player = find_player(game_state)
     bet = player['bet'].to_i
     cards = find_cards(player)
@@ -42,11 +42,13 @@ class Player
    cards.any? { |card| card['rank'].to_i.zero? } # 'A'.to_i == 0
   end
 
-  def rank_raw(game_state)
+  def rank(game_state)
     cards = game_state['community_cards'] +
             game_state['players'][game_state['in_action']]['hole_cards']
 
     client = RankingClient.new
-    client.rank_raw(cards)
+    client.rank_raw(cards)['rank']
+  rescue
+    0
   end
 end
