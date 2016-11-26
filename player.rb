@@ -1,6 +1,6 @@
 class Player
 
-  VERSION = "Version 17"
+  VERSION = "Version 18"
 
   def bet_request(game_state)
     current_buy_in = game_state['current_buy_in'].to_i
