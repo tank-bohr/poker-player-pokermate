@@ -33,9 +33,10 @@ class Player
 
     case rank(game_state)
     when 0 then 0
-    when 1..2 then (bet - current_buy_in < 200 ? current_buy_in : 0)
-    when 3..5 then current_buy_in - bet + minimum_raise
-    when 5..8 then player['stack']
+    when 1 then (bet - current_buy_in < 200 ? current_buy_in : 0)
+    when 2..3 then current_buy_in - bet + minimum_raise
+    when 4..5 then player['stack'] / 2
+    when 6..8 then player['stack']
     end
   end
 
