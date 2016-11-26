@@ -17,7 +17,7 @@ class Player
   end
 
   def find_player(game_state)
-    'pokermate' == game_state['players'].select { |player| player['name'].downcase }
+    game_state['players'][game_state['in_action']]
   end
 
   def find_cards(player)
