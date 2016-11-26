@@ -1,10 +1,13 @@
 require_relative './game_state'
+require_relative 'strategy'
 require_relative 'weight_calc'
 require_relative 'fold_weight'
 require_relative 'call_weight'
 require_relative 'raise_weight'
 
 class BetRequest
+  include Strategy
+
   ACTIONS_WEIGHTS = {
     fold: FoldWeight,
     call: CallWeight,

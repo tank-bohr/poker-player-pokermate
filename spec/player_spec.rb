@@ -61,4 +61,49 @@ RSpec.describe Player do
       end
     end
   end
+
+  describe 'cards_factor' do
+    let(:game_state) do
+      {
+        'in_action' => 0,
+        'players' => [
+          'hole_cards' => cards
+        ]
+      }
+    end
+
+    subject { Player.new.decide(game_state) }
+
+    context '2 and 5 off-suited' do
+      let(:cards) { [{ 'rank' => '2', 'suit' => 'hearts' }, { 'rank' => '5', 'suit' => 'spades' }] }
+
+      it 'fold wins' do
+        expect(subject).to eq :fold
+      end
+    end
+
+    context '8 and 9 suited' do
+      let(:cards) { [{ 'rank' => '8', 'suit' => 'hearts' }, { 'rank' => '9', 'suit' => 'hearts' }] }
+
+      it 'call wins' do
+        expect(subject).to eq :call
+      end
+    end
+
+    context 'Ace and King' do
+      let(:cards) { [{ 'rank' => 'K', 'suit' => 'hearts' }, { 'rank' => 'A', 'suit' => 'spades' }] }
+
+      it 'call wins' do
+        expect(subject).to eq :call
+      end
+    end
+
+    context 'pair' do
+      let(:cards) { [{ 'rank' => '9', 'suite' => 'spades' }, { 'rank' => '9', 'suite' => 'hearts' }] }
+
+      it 'raise wins' do
+        expect(subject).to eq :raise
+      end
+    end
+  end
 end
