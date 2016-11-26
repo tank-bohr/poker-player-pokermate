@@ -1,12 +1,11 @@
 require 'sinatra'
 require 'json'
-require 'logger'
 require_relative 'player'
 
 set :port, 8090
 set :bind, '0.0.0.0'
 
-logger = Logger.new(STDOUT).tap { |l| l.level = 0 }
+before { logger.level = 0 }
 
 post "/" do
   logger.debug { params }
